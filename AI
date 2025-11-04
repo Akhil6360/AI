@@ -1,0 +1,115 @@
+// App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import Home from './Home';
+import Dashboard from './Dashboard';
+import Login from './Login';
+
+function App() {
+  return (
+    <Router>
+      <nav style={{ padding: '1rem', backgroundColor: '#eee' }}>
+        <Link to="/">Home</Link> | <Link to="/dashboard">Dashboard</Link> | <Link to="/login">Login</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
+}
+export default App;
+// Home.js
+import React from 'react';
+function Home() {
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Welcome to Student Support</h1>
+      <p>Confidential emotional support, stress tools, and access to resources for your well-being.</p>
+      <a href="/login">Login/Register</a>
+    </div>
+  );
+}
+export default Home;
+// Login.js
+import React, { useState } from 'react';
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(Logging in ${email});
+    // Here you would integrate authentication logic (Firebase/Auth backend)
+  };
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit}>
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required/><br/><br/>
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/><br/><br/>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+}
+export default Login;
+import React, { useState } from 'react';
+
+function MoodTracker() {
+  const [mood, setMood] = useState('');
+
+  const saveMood = () => {
+    alert(Mood saved: ${mood});
+    setMood('');
+  };
+
+  return (
+    <div>
+      <h3>Mood Tracker</h3>
+      <select value={mood} onChange={(e) => setMood(e.target.value)}>
+        <option value="">Select your mood</option>
+        <option value="Happy">Happy</option>
+        <option value="Sad">Sad</option>
+        <option value="Anxious">Anxious</option>
+        <option value="Stressed">Stressed</option>
+      </select>
+      <button onClick={saveMood} disabled={!mood}>Save Mood</button>
+    </div>
+  );
+}
+
+function MeditationTools() {
+  return (
+    <div>
+      <h3>Guided Meditation</h3>
+      <p>Try a simple breathing exercise: breathe in deeply for 4 seconds, hold for 7 seconds, breathe out for 8 seconds.</p>
+    </div>
+  );
+}
+
+function Resources() {
+  return (
+    <div>
+      <h3>Mental Health Resources</h3>
+      <ul>
+        <li><a href="https://www.mentalhealth.gov" target="_blank" rel="noreferrer">MentalHealth.gov</a></li>
+        <li><a href="https://www.nimh.nih.gov" target="_blank" rel="noreferrer">National Institute of Mental Health</a></li>
+        <li><a href="https://www.samhsa.gov" target="_blank" rel="noreferrer">Substance Abuse and Mental Health Services Administration</a></li>
+      </ul>
+    </div>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div style={{ padding: 20 }}>
+      <h2>Your Dashboard</h2>
+      <MoodTracker />
+      <MeditationTools />
+      <Resources />
+    </div>
+  );
+}
+
+export default Dashboard;
